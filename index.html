@@ -28,6 +28,7 @@
 
       // Verificar si la URL es válida
       if (sheetURL) {
+        // Codificar solo el valor de la URL de la hoja de cálculo
         const calendarURL = `https://noegraf.github.io/regalo-calendario-navidad/?sheet=${encodeURIComponent(sheetURL)}`;
         result.innerHTML = `<a href="${calendarURL}" target="_blank">Tu Calendario de Adviento</a>`;
       } else {
