@@ -1,78 +1,73 @@
-// Obtener el enlace de Google Sheets desde la URL
-const urlParams = new URLSearchParams(window.location.search);
-const sheetURL = urlParams.get('sheet');
+// Datos de ejemplo para los días del calendario de Adviento
+const calendarData = [
+  { day: 1, image: 'https://via.placeholder.com/150', gift: 'Una cita especial' },
+  { day: 2, image: 'https://via.placeholder.com/150', gift: 'https://spotify.com/...' },
+  { day: 3, image: '', gift: '' },
+  { day: 4, image: '', gift: '' },
+  { day: 5, image: '', gift: '' },
+  // Agrega los días restantes con datos similares
+  { day: 6, image: '', gift: '' },
+  { day: 7, image: '', gift: '' },
+  { day: 8, image: '', gift: '' },
+  { day: 9, image: '', gift: '' },
+  { day: 10, image: '', gift: '' },
+  { day: 11, image: '', gift: '' },
+  { day: 12, image: '', gift: '' },
+  { day: 13, image: '', gift: '' },
+  { day: 14, image: '', gift: '' },
+  { day: 15, image: '', gift: '' },
+  { day: 16, image: '', gift: '' },
+  { day: 17, image: '', gift: '' },
+  { day: 18, image: '', gift: '' },
+  { day: 19, image: '', gift: '' },
+  { day: 20, image: '', gift: '' },
+  { day: 21, image: '', gift: '' },
+  { day: 22, image: '', gift: '' },
+  { day: 23, image: '', gift: '' },
+  { day: 24, image: '', gift: '' }
+];
 
-if (!sheetURL) {
-  alert('No se encontró ningún enlace de Google Sheets. Por favor, genera tu calendario.');
-  throw new Error('URL de Google Sheets no encontrada.');
-}
-
-// Configuración inicial del calendario
-const calendar = document.querySelector('.calendar');
-const days = 24; // Días del calendario
-
-// Obtener la fecha actual
+// Obtener el contenedor del calendario
+const calendar = document.getElementById('calendar');
 const today = new Date();
 const currentDay = today.getDate();
 const currentMonth = today.getMonth() + 1; // Meses en JavaScript van de 0 a 11
 
-// Asegurarnos de que sea diciembre
+// Asegurarse de que sea diciembre
 if (currentMonth !== 12) {
   alert('Este calendario solo funciona en diciembre.');
-}
+} else {
+  // Generar los días del calendario
+  calendarData.forEach(data => {
+    const dayDiv = document.createElement('div');
+    dayDiv.className = 'day';
+    dayDiv.textContent = data.day;
 
-// Función para cargar datos desde Google Sheets y procesarlos
-async function loadData() {
-  try {
-    const response = await fetch(sheetURL);
-    if (!response.ok) {
-      throw new Error('Error al cargar el archivo CSV.');
-    }
+    // Bloquear días futuros
+    if (data.day > currentDay) {
+      dayDiv.classList.add('locked');
+      dayDiv.textContent = '🔒';
+    } else {
+      // Evento al hacer clic en días desbloqueados
+      dayDiv.addEventListener('click', () => {
+        if (data.day <= currentDay) {
+          dayDiv.classList.add('opened');
 
-    const csvText = await response.text();
-    const rows = csvText.split('\n'); // Dividir el texto en filas
-    const data = rows.map(row => row.split(',')); // Separar columnas por coma
-
-    // Generar los días del calendario y añadir eventos
-    for (let i = 1; i <= days; i++) {
-      const dayDiv = document.createElement('div');
-      dayDiv.className = 'day';
-      dayDiv.textContent = i;
-
-      // Bloquear días futuros
-      if (i > currentDay) {
-        dayDiv.classList.add('locked'); // Clase para días bloqueados
-        dayDiv.textContent = '🔒';
-      } else {
-        // Evento al hacer clic en días desbloqueados
-        dayDiv.addEventListener('click', () => {
-          if (parseInt(dayDiv.textContent) <= currentDay && currentMonth === 12) {
-            dayDiv.classList.add('opened');
-            const [day, image, gift] = data[i - 1]; // Obtener datos de la fila correspondiente
-
-            // Mostrar una ventana emergente con la información del regalo
-            if (image && gift) {
-              const giftWindow = window.open('', '_blank');
-              giftWindow.document.write(`
-                <h1>Regalo del Día ${i}</h1>
-                <img src="${image.trim()}" alt="Regalo" style="width: 300px;">
-                <p>${gift.trim()}</p>
-              `);
-            } else {
-              alert('No hay datos disponibles para este día.');
-            }
+          // Mostrar un mensaje con la información del regalo
+          if (data.image && data.gift) {
+            const giftWindow = window.open('', '_blank');
+            giftWindow.document.write(`
+              <h1>Regalo del Día ${data.day}</h1>
+              <img src="${data.image.trim()}" alt="Regalo" style="width: 300px;">
+              <p>${data.gift.trim()}</p>
+            `);
+          } else {
+            alert('No hay datos disponibles para este día.');
           }
-        });
-      }
-
-      calendar.appendChild(dayDiv);
+        }
+      });
     }
-  } catch (error) {
-    console.error('Error al cargar y procesar los datos:', error);
-    alert('Hubo un error al cargar los datos de la hoja de cálculo.');
-  }
+
+    calendar.appendChild(dayDiv);
+  });
 }
-
-// Cargar los datos al cargar la página
-loadData();
-

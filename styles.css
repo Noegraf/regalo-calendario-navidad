@@ -1,3 +1,4 @@
+/*
 body {
     font-family: Arial, sans-serif;
     text-align: center;
@@ -35,5 +36,37 @@ body {
     background-color: #ccc;
     color: #666;
     cursor: not-allowed;
-  }
+  } */
   
+
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      margin: 20px auto;
+      max-width: 600px;
+    }
+    .day {
+      background-color: #f0f0f0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 20px;
+      font-size: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .day.locked {
+      background-color: #e0e0e0;
+      cursor: not-allowed;
+    }
+    .day.opened {
+      background-color: #c3e6cb;
+    }
+    .day:hover {
+      background-color: #ddd;
+    }
