@@ -1,0 +1,33 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  h1 {
+    color: #4CAF50;
+  }
+  
+  .calendar {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    max-width: 600px;
+    margin: 20px auto;
+  }
+  
+  .day {
+    background-color: #ffcccb;
+    color: white;
+    font-size: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .day.opened {
+    background-color: #4CAF50;
+  }
+  
