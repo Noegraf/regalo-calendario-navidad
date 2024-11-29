@@ -31,3 +31,9 @@ body {
     background-color: #4CAF50;
   }
   
+  .day.locked {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+  }
+  

@@ -2,15 +2,32 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calendario de Adviento</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Generador de Calendario</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; }
+    form { max-width: 400px; margin: auto; }
+    input, textarea { width: 100%; margin: 10px 0; }
+  </style>
 </head>
 <body>
-  <h1>Calendario de Adviento</h1>
-  <div class="calendar">
-    <!-- Aquí irá el calendario interactivo -->
-  </div>
-  <script src="script.js"></script>
+  <h1>Generador de Calendario de Adviento</h1>
+  <form id="calendarForm">
+    <label for="sheetURL">Enlace a tu Google Sheets (público):</label>
+    <input type="url" id="sheetURL" placeholder="https://docs.google.com/..." required>
+    <button type="submit">Generar Calendario</button>
+  </form>
+  <p id="result"></p>
+
+  <script>
+    const form = document.getElementById('calendarForm');
+    const result = document.getElementById('result');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const sheetURL = document.getElementById('sheetURL').value;
+      const calendarURL = `https://noegraf.github.io/regalo-calendario-navidad/?sheet=${encodeURIComponent(sheetURL)}`;
+      result.innerHTML = `<a href="${calendarURL}" target="_blank">Tu Calendario de Adviento</a>`;
+    });
+  </script>
 </body>
 </html>
