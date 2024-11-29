@@ -24,9 +24,15 @@
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const sheetURL = document.getElementById('sheetURL').value;
-      const calendarURL = `https://noegraf.github.io/regalo-calendario-navidad/?sheet=${encodeURIComponent(sheetURL)}`;
-      result.innerHTML = `<a href="${calendarURL}" target="_blank">Tu Calendario de Adviento</a>`;
+      const sheetURL = document.getElementById('sheetURL').value.trim();
+
+      // Verificar si la URL es válida
+      if (sheetURL) {
+        const calendarURL = `https://noegraf.github.io/regalo-calendario-navidad/?sheet=${encodeURIComponent(sheetURL)}`;
+        result.innerHTML = `<a href="${calendarURL}" target="_blank">Tu Calendario de Adviento</a>`;
+      } else {
+        alert('Por favor, ingresa un enlace válido de Google Sheets.');
+      }
     });
   </script>
 </body>

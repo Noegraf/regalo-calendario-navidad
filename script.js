@@ -1,10 +1,15 @@
-// Obtener el enlace de Google Sheets desde la URL
+// Obtener el parámetro 'sheet' de la URL
 const urlParams = new URLSearchParams(window.location.search);
 const sheetURL = urlParams.get('sheet');
 
 if (!sheetURL) {
   alert('No se encontró ningún enlace de Google Sheets. Por favor, genera tu calendario.');
+} else {
+  // Verificar que la URL sea válida
+  console.log('URL de la hoja:', sheetURL);
 }
+
+// Aquí puedes continuar con la lógica para cargar los datos y mostrar el calendario.
 
 // Configuración inicial del calendario
 const calendar = document.querySelector('.calendar');
