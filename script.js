@@ -1,6 +1,6 @@
 // Obtener el enlace de Google Sheets desde la URL
 const urlParams = new URLSearchParams(window.location.search);
-const sheetURL = urlParams.get('https://docs.google.com/spreadsheets/d/e/2PACX-1vRyTr96HrCfWEEsT39Wlz80ic3StIzyifsIixrLnYHFoamFMkbHv8YosSwut0Si1p_C69q8G4c2MJg_/pub?output=csv');
+const sheetURL = urlParams.get('sheet');
 
 if (!sheetURL) {
   alert('No se encontró ningún enlace de Google Sheets. Por favor, genera tu calendario.');
