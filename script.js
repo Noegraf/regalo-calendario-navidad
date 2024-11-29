@@ -5,11 +5,22 @@ const sheetURL = urlParams.get('sheet');
 if (!sheetURL) {
   alert('No se encontró ningún enlace de Google Sheets. Por favor, genera tu calendario.');
 } else {
-  // Verificar que la URL sea válida
   console.log('URL de la hoja:', sheetURL);
+
+  // Aquí iría la lógica para cargar la hoja de cálculo desde el enlace dado.
+  // Por ejemplo, si usas fetch() para obtener los datos de la hoja:
+  fetch(sheetURL)
+    .then(response => response.text())
+    .then(data => {
+      console.log('Datos de la hoja de cálculo:', data);
+      // Aquí podrías agregar la lógica para procesar y mostrar los datos en el calendario
+    })
+    .catch(error => {
+      console.error('Error al cargar la hoja de cálculo:', error);
+      alert('Hubo un error al cargar los datos de la hoja de cálculo.');
+    });
 }
 
-// Aquí puedes continuar con la lógica para cargar los datos y mostrar el calendario.
 
 // Configuración inicial del calendario
 const calendar = document.querySelector('.calendar');
