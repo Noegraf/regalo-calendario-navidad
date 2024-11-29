@@ -34,9 +34,9 @@ const currentDay = today.getDate();
 const currentMonth = today.getMonth() + 1; // Meses en JavaScript van de 0 a 11
 
 // Asegurarse de que sea diciembre
-if (currentMonth !== 12) {
-  alert('Este calendario solo funciona en diciembre.');
-} else {
+//if (currentMonth !== 12) {
+ // alert('Este calendario solo funciona en diciembre.');
+//} else {
   // Generar los días del calendario
   calendarData.forEach(data => {
     const dayDiv = document.createElement('div');
@@ -70,4 +70,4 @@ if (currentMonth !== 12) {
 
     calendar.appendChild(dayDiv);
   });
-}
+//}
